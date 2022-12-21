@@ -1,0 +1,47 @@
+{% load static %}
+<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"><img src="{% static 'images/eventisign.png' %}" alt="Event-I logo" class="eventi-logo"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" href="/">Approved Events</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Events
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/all-events/">All Events</a></li>
+            <li><a class="dropdown-item" href="#">Favorite Events</a></li>
+            {% if request.user.is_superuser %}
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/create-event/">Create new Event</a></li>
+            {% endif %}
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Locations
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/all-locations/">All Locations</a></li>
+            <li><a class="dropdown-item" href="#">Favorite Locations</a></li>
+            {% if request.user.is_superuser %}
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/create-location/">Add Location</a></li>
+            {% endif %}
+          </ul>
+        </li>
+      </ul>
+      {% if request.user.is_authenticated %}
+      <a href="/logout/" class="nav-logout me-2">Logout</a>
+      {% else %}
+      <a href="/register/" class="nav-register me-2">Register</a>
+      {% endif %}
+    </div>
+  </div>
+</nav>

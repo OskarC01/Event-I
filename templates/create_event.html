@@ -1,0 +1,39 @@
+{% extends 'main.html' %} 
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Create Event{% endblock %}
+
+{% block content %}
+
+<div class="ms-4 mt-4">
+  <a href="/"
+    ><button class="btn btn-outline-secondary">
+      <i class="fa-solid fa-arrow-left-long"></i> Go Back
+    </button></a
+  >
+</div>
+
+<div class="form-text mt-4">
+  <h3>Fill the form to a create new event</h3>
+</div>
+
+<div class="container">
+  <form action="" method="POST" enctype="multipart/form-data"> 
+    <div class="card mt-5">
+      <div class="card-body">
+        {% csrf_token %} 
+        {{ form|crispy }}
+        <br>
+        <br>
+        <input
+          type="submit"
+          class="btn btn-success form-submit-button"
+          value="Submit"
+        />
+      </div>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

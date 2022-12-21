@@ -1,0 +1,44 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}Event-I{% endblock %}
+
+
+
+{% block content %}
+
+<div class="total-events my-5">
+    <h2>Currently approved events: <strong>{{ total_events }}</strong></h2>
+</div>
+
+{% for event in approved_events %}
+
+<div class="container">
+    <div class="card my-3">
+        <div class="card-body">
+            <h3 class="card-title text-center">{{ event.title }}</h3>
+            <hr>
+            {% if event.image %}
+            <img src="{{ event.image.url }}" alt="Event Image" class="card-image"> 
+            {% endif %}
+            <div class="favorite-icon-div">
+                {% if event.is_favorite %}
+                <i class="fa-solid fa-star favorite"></i>
+                {% else %}
+                <i class="fa-regular fa-star not-favorite"></i>
+                {% endif %}
+            </div>
+            <p><i class="fa-solid fa-location-dot mt-3"></i><a href="location/{{ event.location.id }}" class="event-location-redirect ms-2">{{ event.location }}</a></p>
+            <p><i class="fa-regular fa-calendar-days"></i> {{ event.date }}</p>
+            <p><i class="fa-solid fa-circle-exclamation"></i> {{ event.age_restriction }}</p>
+        </div>
+        <div class="buttons-div mt-5">
+            <a href="event/{{ event.id }}/"><button class="btn btn-outline-secondary button-info button-card"><i class="fa-solid fa-info icon-info"></i></button></a>
+        </div>
+    </div>
+</div>
+
+<script src="app.js"></script>
+
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}Location - {{ location.name }}{% endblock %}
+
+
+
+{% block content %}
+
+<div class="ms-4 mt-4">
+    <a href="/"><button class="btn btn-outline-secondary"><i class="fa-solid fa-arrow-left-long"></i> Go Back</button></a>
+</div>
+
+<div class="container">
+    <div class="card my-3">
+        <div class="card-body">
+            <h3 class="card-title text-center">{{ location.name }}</h3>
+            <hr>
+            {% if location.image %}
+            <img src="{{ location.image.url }}" alt="Location Image" class="card-image">
+            <hr>
+            {% endif %}
+            <div class="location-info">
+                <p><i class="fa-solid fa-location-dot mt-3 "></i> {{ location.address }}</p>
+                <p><i class="fa-solid fa-envelope"></i> {{ location.email }}</p>
+                <p><i class="fa-solid fa-phone"></i> {{ location.phone }}</p>
+                {% if location.description %}
+                <div class="location-description">
+                    <p>{{ location.description }}</p>
+                </div>
+                {% endif %}
+                {% if request.user.is_superuser %}
+                <div class="location-manager-info">
+                    <p><i class="fa-solid fa-user-tie"></i> {{ location.manager }}</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

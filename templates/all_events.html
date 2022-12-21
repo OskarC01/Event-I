@@ -1,0 +1,40 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}Events{% endblock %}
+
+
+
+{% block content %}
+
+<div class="total-events my-5">
+    <h2>Currently available events: <strong>{{ total_events }}</strong></h2>
+</div>
+
+{% for event in events %}
+
+<div class="container">
+    <div class="card my-3">
+        <div class="card-body">
+            <h3 class="card-title text-center">{{ event.title }}</h3>
+            <hr>
+            {% if event.image %}
+            <img src="{{ event.image.url }}" alt="Event Image" class="card-image">
+            {% endif %}
+            <p><i class="fa-solid fa-location-dot mt-3"></i><a href="location/{{ event.location.id }}" class="event-location-redirect ms-2">{{ event.location }}</a></p>
+            <p><i class="fa-regular fa-calendar-days"></i> {{ event.date }}</p>
+            <p><i class="fa-solid fa-circle-exclamation"></i> {{ event.age_restriction }}</p>
+        </div>
+        <div class="buttons-div mt-5">
+            <a href="/event/{{ event.id }}/"><button class="btn btn-outline-secondary button-info button-card"><i class="fa-solid fa-info icon-info"></i></button></a>
+            {% if request.user.is_superuser %}
+            <div class="buttons-admin">
+                <a href="/edit-event/{{ event.id }}/"><button class="btn btn-outline-success button-card"><i class="fa-solid fa-pen"></i></button></a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+{% endblock %}

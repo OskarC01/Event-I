@@ -1,0 +1,38 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}Locations{% endblock %}
+
+
+
+{% block content %}
+
+<div class="total-events my-5">
+    <h2>Registered locations: <strong>{{ total_locations }}</strong></h2>
+</div>
+
+{% for location in locations %}
+
+<div class="container">
+    <div class="card my-3">
+        <div class="card-body">
+            <h3 class="card-title text-center">{{ location.name }}</h3>
+            <hr>
+            {% if location.image %}
+            <img src="{{ location.image.url }}" alt="Location Image" class="card-image">
+            {% endif %}
+            <p><i class="fa-solid fa-location-dot mt-3"></i> {{ location.address }}</p>
+        </div>
+        <div class="buttons-div mt-5">
+            <a href="/location/{{ location.id }}/"><button class="btn btn-outline-secondary button-info button-card"><i class="fa-solid fa-info icon-info"></i></button></a>
+            {% if request.user.is_superuser %}
+            <div class="buttons-admin">
+                <a href="/edit-location/{{ location.id }}"><button class="btn btn-outline-success button-card"><i class="fa-solid fa-pen"></i></button></a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+{% endblock %}
